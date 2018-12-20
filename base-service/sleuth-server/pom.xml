@@ -14,7 +14,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-eureka</artifactId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -32,9 +32,13 @@
 		</dependency> -->
 		
 		<!-- 采用中间件的形式跟踪消息 -->
-		<dependency>
-		    <groupId>org.springframework.cloud</groupId>
-		    <artifactId>spring-cloud-sleuth-zipkin-stream</artifactId>
+		<dependency> 
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-zipkin</artifactId>
+		</dependency>
+		<dependency> 
+			<groupId>org.springframework.amqp</groupId>
+			<artifactId>spring-rabbit</artifactId>
 		</dependency>
 		<dependency>
 		    <groupId>org.springframework.cloud</groupId>
@@ -45,12 +49,14 @@
 			<groupId>io.zipkin.java</groupId>
 			<artifactId>zipkin-autoconfigure-ui</artifactId>
 			<scope>runtime</scope>
+			<version>2.11.12</version>
 		</dependency>
 		
 		<!--保存到数据库需要如下依赖 -->
 		<dependency>
 			<groupId>io.zipkin.java</groupId>
 			<artifactId>zipkin-autoconfigure-storage-mysql</artifactId>
+			<version>2.11.12</version>
 		</dependency>
 <!-- 		<dependency>   -->
 <!-- 		    <groupId>io.zipkin.java</groupId>   -->
@@ -76,19 +82,8 @@
 		<dependency>
 			<groupId>de.codecentric</groupId>
 			<artifactId>spring-boot-admin-starter-client</artifactId>
-			<version>1.4.6</version>
+			<version>${spring-boot-admin.version}</version>
 		</dependency>
 	</dependencies>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>Camden.SR5</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 </project>

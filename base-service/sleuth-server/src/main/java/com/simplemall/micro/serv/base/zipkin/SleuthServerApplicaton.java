@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.sleuth.zipkin.stream.EnableZipkinStreamServer;
 
 /**
  * 两种方式实现链式跟踪，一种使用http的方式接受消息，一种采用消息中间件的形式来跟踪信息
@@ -24,7 +23,7 @@ import org.springframework.cloud.sleuth.zipkin.stream.EnableZipkinStreamServer;
 //@SpringBootApplication
 @SpringBootApplication(exclude={DataSourceAutoConfiguration.class,HibernateJpaAutoConfiguration.class})
 // @EnableZipkinServer //使用Stream方式启动ZipkinServer
-@EnableZipkinStreamServer
+//@EnableZipkinStreamServer
 @EnableDiscoveryClient
 public class SleuthServerApplicaton {
 
