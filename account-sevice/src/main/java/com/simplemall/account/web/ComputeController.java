@@ -1,5 +1,6 @@
 package com.simplemall.account.web;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.slf4j.Logger;
@@ -7,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.client.serviceregistry.Registration;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +30,9 @@ public class ComputeController {
 
     @Autowired
     private DiscoveryClient client;
+    
+    @Autowired
+    private Registration registration; // 服务注册
     
 //    static{
 //        Timer timer = new Timer();
@@ -77,7 +82,8 @@ public class ComputeController {
 	        return "From Service-B, Result is " + r+"\nPort:"+instance.getPort();
         }*/
         
-        ServiceInstance instance = client.getLocalServiceInstance();
+    	List<ServiceInstance> list = client.getInstances(registration.getServiceId());
+        ServiceInstance instance = list.get(0);//client.getLocalServiceInstance();
         Integer r = a + b;
         logger.info("/add, host:" + instance.getHost() + ", service_id:" + instance.getServiceId() + ", result:" + r);
         return "From Service-B, Result is " + r+"\nPort:"+instance.getPort();
